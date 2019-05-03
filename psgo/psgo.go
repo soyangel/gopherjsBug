@@ -22,8 +22,11 @@ func NewSubscriber(f func(msg *Msg)) *Subscriber {
 }
 
 func (su *Subscriber) Subscribe(paths ...string) {
+	//
+	// COMMENTING THE FOLLOWING 2 LINES FIXES THE BUG!!!!!!
 	psLock.Lock()
 	defer psLock.Unlock()
+
 	for _, path := range paths {
 		msg := oldMessages[path]
 		if msg != nil {
